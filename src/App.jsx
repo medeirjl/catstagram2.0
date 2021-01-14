@@ -38,10 +38,14 @@
 
 
 import React from 'react';
+import Header from './components/Header.jsx'
+import HomePage from './pages/HomePage.jsx'
 
 function App() {
     return (
-        <div>
+        <div className="App">
+            <Header />
+            <HomePage />
         </div>
     );
 }

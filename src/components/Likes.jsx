@@ -19,3 +19,14 @@
 	 // hint: take the total likes as a prop, and convert it to state
 
 import React from 'react';
+
+function Likes() {
+    return (
+        <div className="Likes">
+        	<span>Likes</span>
+        	<button className="LikesButton" type="button">&lt;3</button>
+        </div>
+    );
+}
+
+export default Likes;

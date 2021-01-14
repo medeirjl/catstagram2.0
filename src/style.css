@@ -17,6 +17,7 @@ body {
     font-size: 18px;
     color: white;
     background-color: #f95a61;
+    margin-top: 0;
     margin-bottom: 50px;
     display: flex;
     flex-flow: row wrap;
