@@ -13,7 +13,6 @@
     // and don't pass it in as props to FeedList
 
 import React from 'react';
-import data from '../data.json';
 import ImageUploaderForm from './../components/ImageUploaderForm'
 import FeedList from './../components/FeedList'
 

@@ -18,13 +18,29 @@
 	 // increase or decrease the likes based on whether button click is like/ unlike
 	 // hint: take the total likes as a prop, and convert it to state
 
-import React from 'react';
+import React, {useState} from 'react';
 
-function Likes() {
+function Likes(props) {
+	const { number } = props;
+
+	const [isLiked, setIsLiked] = useState(false);
+	const [numLikes, setNumLikes] = useState(number);
+
+	const updateLike = () => {
+		// if already liked, we are unliking, so decrease
+		if (isLiked) {
+			setNumLikes(numLikes - 1)
+		} else {
+			setNumLikes(numLikes + 1)
+		}
+
+		setIsLiked(!isLiked)
+	}
+
     return (
         <div className="Likes">
-        	<span>Likes</span>
-        	<button className="LikesButton" type="button">&lt;3</button>
+        	<span>{numLikes} Likes</span>
+        	<button className="LikesButton" type="button" onClick={updateLike}>{ isLiked ? '<3' : '</3' }</button>
         </div>
     );
 }

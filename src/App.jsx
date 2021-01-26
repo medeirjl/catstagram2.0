@@ -37,16 +37,33 @@
 	// set up Route to with paths to each page (hint: HomePage should "/") and with the appropriate component
 
 
-import React from 'react';
+import React, { createContext, useState } from 'react';
 import Header from './components/Header.jsx'
 import HomePage from './pages/HomePage.jsx'
+import data from './data.json';
+
+export const PhotosContext = createContext()
 
 function App() {
+    const [photos, setPhotos] = useState(data.photos)
+
+    const addPhoto = (url) => {
+        let newPhoto = {
+            id: photos.length + 1,
+            likes: 0,
+            url: url,
+            userLiked: false
+        }
+        setPhotos([ newPhoto, ...photos ])
+    }
+
     return (
-        <div className="App">
-            <Header />
-            <HomePage />
-        </div>
+        <PhotosContext.Provider value={{photos, addPhoto}}>
+            <div className="App">
+                <Header />
+                <HomePage />
+            </div>
+        </PhotosContext.Provider>
     );
 }
 
