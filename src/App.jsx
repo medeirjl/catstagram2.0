@@ -37,15 +37,14 @@
 	// set up Route to with paths to each page (hint: HomePage should "/") and with the appropriate component
 
 
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import Header from './components/Header.jsx'
 import HomePage from './pages/HomePage.jsx'
-import data from './data.json';
 
 export const PhotosContext = createContext()
 
 function App() {
-    const [photos, setPhotos] = useState(data.photos)
+    const [photos, setPhotos] = useState([])
 
     const addPhoto = (url) => {
         let newPhoto = {
@@ -54,8 +53,21 @@ function App() {
             url: url,
             userLiked: false
         }
-        setPhotos([ newPhoto, ...photos ])
+        
+        //setPhotos([ newPhoto, ...photos ])
+
+        // so we make sure the data is up to date
+        setPhotos( (prevState) => {
+            return [ newPhoto, ...prevState ]
+        })
     }
+
+    useEffect(() => {
+        fetch("https://api.jsonbin.io/b/600f8e05bca934583e41c665")
+            .then(result => result.json(result))
+            .then(result => setPhotos(result.photos))
+            .catch(error => console.log(error))
+    }, [])
 
     return (
         <PhotosContext.Provider value={{photos, addPhoto}}>
