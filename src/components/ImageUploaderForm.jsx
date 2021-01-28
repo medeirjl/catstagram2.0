@@ -35,7 +35,7 @@ function ImageUploaderForm() {
 
     const submitUrl = (e) => {
         e.preventDefault()
-        if (imgUrl == '') return;
+        if (imgUrl === '') return;
         addPhoto(imgUrl)
         setImgUrl('')
     }

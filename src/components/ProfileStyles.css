@@ -1,0 +1,68 @@
+.ProfileHeader {
+	margin-top: -50px;
+	position: relative;
+}
+
+.ProfileBackground {
+	width: 100vw;
+	height: 30vw;
+	object-fit: cover;
+}
+
+.ProfilePicture {
+	width: 250px;
+	height: 250px;
+	position: absolute;
+	bottom: 50px;
+	object-fit: cover;
+	left: calc(50% - 125px);
+	border-radius: 50%;
+	border: 5px solid #fff;
+}
+
+.ProfileName {
+	font-size: 32px;
+	text-align: center;
+	margin-top: 120px;
+}
+
+.ProfileContent {
+	max-width: 1000px;
+	margin: 20px auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+.ProfileContentLeft {
+	width: 300px;
+	padding: 5px 15px;
+	border-radius: 4px;
+	background-color: #fff;
+	box-shadow: 2px -1px 4px rgba(0,0,0,0.03), 
+              0 2px 2px rgba(0,0,0,0.03), 
+              0 4px 4px rgba(0,0,0,0.03);
+}
+.ProfileContentRight {
+	width: 670px;
+	padding: 15px 15px;
+	border-radius: 4px;
+	background-color: #fff;
+	box-shadow: 2px -1px 4px rgba(0,0,0,0.03), 
+              0 2px 2px rgba(0,0,0,0.03), 
+              0 4px 4px rgba(0,0,0,0.03);
+}
+.ProfileContentRight h2 {
+	margin-top: 0;
+}
+.ProfileContentRight h2 + p {
+	margin-bottom: 0;
+}
+.ProfileContentRight img {
+	display: block;
+	width: 100%;
+	margin: 0 auto 25px;
+}
+.ProfileContentRight img:last-of-type {
+	margin-bottom: 0;
+}

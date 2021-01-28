@@ -18,20 +18,29 @@
 	 // increase or decrease the likes based on whether button click is like/ unlike
 	 // hint: take the total likes as a prop, and convert it to state
 
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
+import {PhotosContext} from '../App'
 
 function Likes(props) {
-	const { number } = props;
+	const { addLikedPhoto, removeLikedPhoto, likedPhotos } = useContext(PhotosContext)
+	const { number, id } = props;
 
-	const [isLiked, setIsLiked] = useState(false);
+	const isInLikedArray = () => {
+		return likedPhotos.includes(id)
+	}
+
+	const [isLiked, setIsLiked] = useState(isInLikedArray);
 	const [numLikes, setNumLikes] = useState(number);
+
 
 	const updateLike = () => {
 		// if already liked, we are unliking, so decrease
 		if (isLiked) {
 			setNumLikes(numLikes - 1)
+			removeLikedPhoto(id)
 		} else {
 			setNumLikes(numLikes + 1)
+			addLikedPhoto(id)
 		}
 
 		setIsLiked(!isLiked)

@@ -20,7 +20,7 @@ function FeedItem(props) {
     return (
         <div className="FeedItem">
         	<img className="Image" src={photo.url} alt="cat" />
-        	<Likes number={photo.likes} />
+        	<Likes id={photo} number={photo.likes} />
         </div>
     );
 }

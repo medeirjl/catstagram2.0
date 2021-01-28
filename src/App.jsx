@@ -37,14 +37,22 @@
 	// set up Route to with paths to each page (hint: HomePage should "/") and with the appropriate component
 
 
-import React, { createContext, useState, useEffect } from 'react';
-import Header from './components/Header.jsx'
-import HomePage from './pages/HomePage.jsx'
+//import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState } from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+import Header from './components/Header.jsx';
+import HomePage from './pages/HomePage.jsx';
+import AboutPage from './pages/AboutPage.jsx';
+import ProfilePage from './pages/ProfilePage.jsx';
+import data from './data.json';
 
 export const PhotosContext = createContext()
 
+
 function App() {
-    const [photos, setPhotos] = useState([])
+    //const [photos, setPhotos] = useState([])
+    const [photos, setPhotos] = useState(data.photos)
+    const [likedPhotos, setLikedPhotos] = useState([])
 
     const addPhoto = (url) => {
         let newPhoto = {
@@ -53,7 +61,7 @@ function App() {
             url: url,
             userLiked: false
         }
-        
+
         //setPhotos([ newPhoto, ...photos ])
 
         // so we make sure the data is up to date
@@ -62,20 +70,39 @@ function App() {
         })
     }
 
-    useEffect(() => {
-        fetch("https://api.jsonbin.io/b/600f8e05bca934583e41c665")
-            .then(result => result.json(result))
-            .then(result => setPhotos(result.photos))
-            .catch(error => console.log(error))
-    }, [])
+    const addLikedPhoto = (id) => {
+        setLikedPhotos( (prevState) => {
+            return [ id, ...prevState ]
+        })
+    }
+
+    const removeLikedPhoto = (id) => {
+        setLikedPhotos( (prevState) => {
+            const start = prevState.indexOf(id)
+            prevState.splice(start, 1)
+            return prevState
+        })
+    }
+
+    // comment out so we don't overuse the api
+    // useEffect(() => {
+    //     fetch("https://api.jsonbin.io/b/600f8e05bca934583e41c665")
+    //         .then(result => result.json(result))
+    //         .then(result => setPhotos(result.photos))
+    //         .catch(error => console.log(error))
+    // }, [])
 
     return (
-        <PhotosContext.Provider value={{photos, addPhoto}}>
-            <div className="App">
-                <Header />
-                <HomePage />
-            </div>
-        </PhotosContext.Provider>
+            <BrowserRouter>
+            <PhotosContext.Provider value={{photos, addPhoto, likedPhotos, addLikedPhoto, removeLikedPhoto}}>
+                <div className="App">
+                    <Header />
+                    <Route exact path="/" component={HomePage} />
+                    <Route path="/about" component={AboutPage} />
+                    <Route path="/profile" component={ProfilePage} />
+                </div>
+            </PhotosContext.Provider>
+        </BrowserRouter>
     );
 }
 
